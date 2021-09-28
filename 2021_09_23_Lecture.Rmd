@@ -1,0 +1,22 @@
+---
+title: "Simple document"
+output: github_document
+---
+
+We can use gitignore to ignore the files that we don't want to commit, for example, write line "/data" so that we cannot commit the data folder. 
+
+
+# Section 1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_:
+
+```{r}
+samp = rnorm(100)
+length(samp)
+```
+
+# Section 2
+
+I can take the mean of the sample, too!
+The mean is `r mean(samp)`.
