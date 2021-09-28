@@ -21,3 +21,43 @@ pups_df = read_csv("data/FAS_pups.csv")
 pups_df = janitor::clean_names(pups_df)
 ```
 
+## `Select`
+
+Let's select some columns.
+
+```{r， eval=FALSE}
+#select cols that I'm interested about
+select(litters_df, group, litter_number)
+select(litters_df, group, gd0_weight, gd18_weight)
+
+#taking everything from gd0_weight to gd_of_birth
+select(litters_df, group, gd0_weight:gd_of_birth)
+
+#everything except litter number 
+select(litters_df, -litter_number)
+
+#start with or end with 
+select(litters_df, grouos, starts_with("pups"))
+
+#rename a col
+select(litters_df, GROUP = group, litter_number)
+
+#not selecting anything, but renaming 
+rename(litters_df, GROUP = group)
+
+# select in the order that i want/ relocate litter number to the first col
+select(litters_df, litter_number, everything())
+
+#similarly, we can do 
+relocate(litters_df,litter_number)
+
+select(litters_df,group) #gives a data frame with just one col
+
+#pull(litters_df, group) #extract out the col
+```
+
+```{r, eval=FALSE}
+#exercise: select the columns containing litter number, sex, and pd ears from pups data
+select(pups_df, litter_number, sex, pd_ears)
+```
+
