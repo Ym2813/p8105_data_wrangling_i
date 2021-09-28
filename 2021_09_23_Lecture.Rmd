@@ -5,18 +5,57 @@ output: github_document
 
 We can use gitignore to ignore the files that we don't want to commit, for example, write line "/data" so that we cannot commit the data folder. 
 
-
-# Section 1
-
-Here's a **code chunk** that samples from 
-a _normal distribution_:
-
-```{r}
-samp = rnorm(100)
-length(samp)
+```{r, echo = FALSE, message = FALSE}
+#we don't see anything here in the output, just things that we do ourselves in the background
+library(tidyverse)
 ```
 
-# Section 2
+## Import some data
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+I want to import `FAS_litters.csv`;
+
+```{r}
+# taken directly from the data folder in our current directory
+litters_df = read_csv("data/FAS_litters.csv")
+```
+
+```{r, include=FALSE}
+#absolute path, should avoid
+read_csv("/Users/Yma04/R/DS_P8105/Lecture Notes/p8105_data_wrangling_i/data/FAS_litters.csv")
+#we can use "tab" after typing "/Users/", r will automatically go from there 
+```
+
+First step: clean the data to the format that I'm comfortable with
+```{r}
+names(litters_df)
+
+litters_df = janitor::clean_names(litters_df)
+```
+
+first line of code show the original names of the df
+second line use janitor to convert the names to snake cases, replacing the old version of the df with the new version, the one cleaned by janitor 
+`janitor::clean_names(litters_df)` is a short way to tell r to find the clean_names function in janitor without having to load all of the janitor package 
+
+## Taking a look at the data set
+
+print out the dataset 
+```{r}
+litters_df 
+
+head(litters_df)
+tail(litters_df)
+```
+
+One I use a lot it: viewing the data set on a seperate sheet
+```{r, eval=FALSE}
+#viewing is interactive, so maybe it will have problem during knitting, so put eval=FALSE
+view(litters_df)
+```
+
+Here's `skimr`:
+```{r}
+skimr::skim(litters_df)
+```
+
+
+
